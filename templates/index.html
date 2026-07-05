@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Security Header Auditor</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static',filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🔒 Security Header Auditor</h1>
+
+<form method="POST">
+
+<input
+type="text"
+name="url"
+placeholder="Enter Website URL">
+
+<button type="submit">
+Scan Website
+</button>
+
+</form>
+
+{% if results %}
+
+{% if results.error %}
+
+<p>{{results.error}}</p>
+
+{% else %}
+
+<h2>🌐 Website: {{results.url}}</h2>
+
+<div class="score">
+Security Score : {{score}} /100
+</div>
+
+<h3>🔐 SSL Information</h3>
+
+<ul>
+
+<li>
+<b>Status:</b>
+{{results.ssl.status}}
+</li>
+
+{% if results.ssl.status=="Valid" %}
+
+<li>
+<b>Issuer:</b>
+{{results.ssl.issuer}}
+</li>
+
+<li>
+<b>Expires:</b>
+{{results.ssl.expires}}
+</li>
+
+{% endif %}
+
+</ul>
+
+
+<h3>🛡 Security Headers</h3>
+
+<ul>
+
+{% for key,value in results.headers.items() %}
+
+<li>
+
+<b>{{key}}</b>
+
+<br>
+
+Status:
+{{value.status}}
+
+<br>
+
+Description:
+{{value.description}}
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+
+<h3>🍪 Cookie Security</h3>
+
+<ul>
+
+{% for key,value in results.cookies.items() %}
+
+<li>
+
+<b>{{key}}</b> :
+{{value}}
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% endif %}
+{% endif %}
+
+</div>
+
+</body>
+
+</html>
