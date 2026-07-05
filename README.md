@@ -42,7 +42,13 @@ A web-based cybersecurity project built using Flask and Python that scans websit
 * SSL & Socket Modules
 
 ---
+## 📸 Project Screenshots
 
+### Home Page
+
+![Home Page](screenshots/home-page.png)
+
+---
 ## 📂 Project Structure
 
 ```bash
